@@ -10,6 +10,7 @@ public class Dictionary {
 	LinkedList<String> dizionario = new LinkedList<String>();
 	
 	public Dictionary() {
+		dizionario.clear();
 		
 	}
 
@@ -17,7 +18,7 @@ public class Dictionary {
 		
 		//if(language.compareTo("English") == 0) {
 		
-		dizionario.clear();
+		//dizionario.clear();
 		
 		try { 
 			
@@ -58,7 +59,16 @@ public class Dictionary {
 		LinkedList<RichWord> richWordTemp = new LinkedList<RichWord>();
 		
 		for(String a : inputTextList) {
-			for(String e : dizionario) {
+			if(dizionario.contains(a)) {
+				RichWord rTemp = new RichWord(a,true);
+				richWordTemp.add(rTemp);
+			}else {
+				RichWord rTemp1 = new RichWord(a,false);
+				richWordTemp.add(rTemp1);
+			}
+				
+			
+			/*for(String e : dizionario) {
 				if(a.compareTo(e) == 0) {
 					RichWord rTemp = new RichWord(a,true);
 					richWordTemp.add(rTemp);
@@ -67,7 +77,7 @@ public class Dictionary {
 					richWordTemp.add(rTemp);
 				}
 			
-			}
+			}*/
 		}
 		
 		/*for(String a : inputTextList) {

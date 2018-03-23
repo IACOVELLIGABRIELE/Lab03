@@ -80,23 +80,29 @@ public class SpellCheckerController {
     	String testo = txtTesto.getText();
     	testo.replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_`~()\\[\\]]\\\"", "");
     	
+    	System.out.println("sono prima del for");
+    	
     	for(String c : testo.split(" ")) {
     		testoTemp.add(c.toLowerCase());
     	}
     	
+    	
     	model.loadDictionary(linguaggio);
+    
     	
     	for(RichWord a : model.spellCheckText(testoTemp) ) {
+    		System.out.println("dentro secondo for");
     		if(a.isCorretto() == false) {
+    			System.out.println("dentro if del secondo for");
     			txtError.appendText(a.getParola()+"\n");
     			errori++;
     		}
     	}
 
-    	String z = "Tempo di esecuzione"+System.nanoTime();
+    	String z = "Tempo di esecuzione "+System.nanoTime()+" s";
     	labTime.setText(z);
-    	labError.setText("Sono stati riscontrati"+errori+" errori");
-        txtTesto.clear();
+    	labError.setText("Sono stati riscontrati "+errori+" errori");
+        //txtTesto.clear();
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -108,6 +114,7 @@ public class SpellCheckerController {
         assert labError != null : "fx:id=\"labError\" was not injected: check your FXML file 'SpellChecker.fxml'.";
         assert btnClearText != null : "fx:id=\"btnClearText\" was not injected: check your FXML file 'SpellChecker.fxml'.";
         assert labTime != null : "fx:id=\"labTime\" was not injected: check your FXML file 'SpellChecker.fxml'.";
+        choiceBox.setValue("English");
         choiceBox.setItems(FXCollections.observableArrayList("English","Italian"));
     }
 }
